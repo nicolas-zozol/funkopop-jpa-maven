@@ -39,9 +39,11 @@ public class JpaApplication {
 		// We start
 		EntityManager em = EmFactory.createEntityManager();
 		em.getTransaction().begin();
-
-		// We work
 		System.out.println("  ========== STARTING WORK ======= ");
+		
+		standard.getProducts().add(ketchup);
+		standard.getProducts().add(milk);
+		premium.getProducts().add(watch);
 		
 		em.persist(csp);
 		em.persist(luxe);
@@ -49,54 +51,25 @@ public class JpaApplication {
 		em.persist(standard);
 		em.persist(lowcost);
 		
-		ketchup.setCategory(standard);
-		milk.setCategory(standard);
-		watch.setCategory(luxe);
-		
 		em.persist(ketchup);
 		em.persist(milk);
 		em.persist(watch);
 		
-		
-		
-		
-		
-		String query = "SELECT p.name FROM Product p WHERE p.category.name='standard'";
-		
-		List<String> result = em
-				.createQuery(query,String.class)
-				.getResultList();
-		
-		System.out.println("found :" + result);
-		
-		
-		
-
-
-		
-
 		System.out.println("  ========== COMMIT ======= ");
-		
 		em.getTransaction().commit();
 		em.close();
 		
-		EmFactory.transaction( e ->{
-			System.out.println("  ========== 2nd transaction======= ");
-			String q = "SELECT p FROM Product p";
-			
-			List<Product> products = e
-					.createQuery(q,Product.class)
-					.getResultList();
-			List<Product> filtered = new ArrayList<>();
-			for (Product p : products){
-				if (p.getCategory().getName().equals("standard")){
-					filtered.add(p);
-				}
-			}
-			System.out.println(filtered);
-			
-			
-		});
+		System.out.println("  ========== NEW QUERY ======= ");
+		em = EmFactory.createEntityManager();
+		em.getTransaction().begin();
+
+		Category mergedStandard = em.merge(standard);
+		System.out.println(mergedStandard.getProducts());
+		
+		em.getTransaction().commit();
+		em.close();
+
+	
 		
 		
 	}

@@ -1,22 +1,27 @@
 package io.robusta.jpa.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
-
 	//Do we need an int id ?
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue
 	int id;
 	String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	Category parent;
+	
+	@OneToMany
+	List<Product> products = new ArrayList<>();
 	
 	
 	public Category() {
@@ -56,6 +61,16 @@ public class Category {
 	public String toString() {
 		return this.name;
 	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	
 	
 	
 	
