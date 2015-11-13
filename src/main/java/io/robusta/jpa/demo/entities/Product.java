@@ -1,9 +1,12 @@
 package io.robusta.jpa.demo.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Product{
@@ -14,8 +17,8 @@ public class Product{
 	String name;
 	float price;
 	
-	@ManyToOne
-	Category category;
+	@ManyToMany
+	Set<Category> categories = new HashSet<>();
 	
 	
 	public Product() {
@@ -54,13 +57,14 @@ public class Product{
 		return this.name;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Set<Category> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
 	}
+
 	
 	
 	

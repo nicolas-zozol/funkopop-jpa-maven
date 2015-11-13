@@ -25,6 +25,7 @@ public class JpaApplication {
 		Category premium = new Category("premium");
 		Category standard = new Category("standard");
 		Category lowcost = new Category("low-cost");
+		Category fooding = new Category("fooding");
 		
 		luxe.setParent(csp);
 		premium.setParent(csp);
@@ -38,18 +39,26 @@ public class JpaApplication {
 		em.getTransaction().begin();
 		System.out.println("  ========== STARTING WORK ======= ");
 		
+		fooding.getProducts().add(ketchup);
+		fooding.getProducts().add(milk);
+		
 		standard.getProducts().add(ketchup);
-		ketchup.setCategory(standard);
+		ketchup.getCategories().add(standard);
+		ketchup.getCategories().add(fooding);
+		
 		standard.getProducts().add(milk);
-		milk.setCategory(standard);
+		milk.getCategories().add(standard);
+		milk.getCategories().add(fooding);
+		
 		premium.getProducts().add(watch);
-		watch.setCategory(premium);
+		watch.getCategories().add(luxe);
 		
 		em.persist(csp);
 		em.persist(luxe);
 		em.persist(premium);
 		em.persist(standard);
 		em.persist(lowcost);
+		em.persist(fooding);
 		
 		em.persist(ketchup);
 		em.persist(milk);
@@ -63,7 +72,7 @@ public class JpaApplication {
 		
 		EmFactory.transaction( e -> {
 			Product mergedKetchup = e.merge(ketchup);
-			System.out.println(mergedKetchup.getCategory());
+			System.out.println(mergedKetchup.getCategories());
 		});
 		
 	
