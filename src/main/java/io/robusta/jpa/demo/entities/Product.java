@@ -3,10 +3,9 @@ package io.robusta.jpa.demo.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
-public class Product {
+public class Product{
 
 	@Id
 	@GeneratedValue
