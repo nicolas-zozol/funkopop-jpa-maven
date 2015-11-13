@@ -39,8 +39,11 @@ public class JpaApplication {
 		System.out.println("  ========== STARTING WORK ======= ");
 		
 		standard.getProducts().add(ketchup);
+		ketchup.setCategory(standard);
 		standard.getProducts().add(milk);
+		milk.setCategory(standard);
 		premium.getProducts().add(watch);
+		watch.setCategory(premium);
 		
 		em.persist(csp);
 		em.persist(luxe);
@@ -57,15 +60,12 @@ public class JpaApplication {
 		em.close();
 		
 		System.out.println("  ========== NEW QUERY ======= ");
-		em = EmFactory.createEntityManager();
-		em.getTransaction().begin();
-
-		Category mergedStandard = em.merge(standard);
-		System.out.println(mergedStandard.getProducts());
 		
-		em.getTransaction().commit();
-		em.close();
-
+		EmFactory.transaction( e -> {
+			Product mergedKetchup = e.merge(ketchup);
+			System.out.println(mergedKetchup.getCategory());
+		});
+		
 	
 		
 		

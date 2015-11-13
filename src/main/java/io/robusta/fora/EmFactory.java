@@ -38,10 +38,7 @@ public class EmFactory {
 		EntityManager em = createEntityManager();
 		em.getTransaction().begin();
 		
-		
-		
 		worker.work(em);
-		
 		
 		em.getTransaction().commit();
 		em.close();

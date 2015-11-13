@@ -3,6 +3,7 @@ package io.robusta.jpa.demo.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Product{
@@ -13,6 +14,8 @@ public class Product{
 	String name;
 	float price;
 	
+	@ManyToOne
+	Category category;
 	
 	
 	public Product() {
@@ -49,6 +52,14 @@ public class Product{
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 	
