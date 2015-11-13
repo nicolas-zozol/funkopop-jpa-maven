@@ -20,6 +20,7 @@ public class JpaApplication {
 		Product chair = new Product("Chair", 10.00f);
 		Product hat = new Product("Hat", 70f);
 
+
 		Category csp = new Category("CSP");
 		Category luxe = new Category("luxory");
 		Category premium = new Category("premium");
@@ -33,25 +34,19 @@ public class JpaApplication {
 		lowcost.setParent(csp);
 		
 		
-
+		
+		
 		// We start
 		EntityManager em = EmFactory.createEntityManager();
 		em.getTransaction().begin();
 		System.out.println("  ========== STARTING WORK ======= ");
 		
-		fooding.getProducts().add(ketchup);
-		fooding.getProducts().add(milk);
 		
-		standard.getProducts().add(ketchup);
-		ketchup.getCategories().add(standard);
-		ketchup.getCategories().add(fooding);
 		
-		standard.getProducts().add(milk);
-		milk.getCategories().add(standard);
-		milk.getCategories().add(fooding);
+		ketchup.setCategory(standard);
+		milk.setCategory(standard);
+		watch.setCategory(luxe);
 		
-		premium.getProducts().add(watch);
-		watch.getCategories().add(luxe);
 		
 		em.persist(csp);
 		em.persist(luxe);
@@ -71,8 +66,11 @@ public class JpaApplication {
 		System.out.println("  ========== NEW QUERY ======= ");
 		
 		EmFactory.transaction( e -> {
-			Product mergedKetchup = e.merge(ketchup);
-			System.out.println(mergedKetchup.getCategories());
+			
+
+			
+			
+			
 		});
 		
 	

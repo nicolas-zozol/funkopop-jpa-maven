@@ -1,16 +1,14 @@
 package io.robusta.jpa.demo.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="categorie")
 public class Category {
 	//Do we need an int id ?
 	@Id @GeneratedValue
@@ -20,8 +18,6 @@ public class Category {
 	@ManyToOne(fetch=FetchType.LAZY)
 	Category parent;
 	
-	@ManyToMany
-	List<Product> products = new ArrayList<>();
 	
 	
 	public Category() {
@@ -62,13 +58,7 @@ public class Category {
 		return this.name;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+	
 
 	@Override
 	public int hashCode() {
