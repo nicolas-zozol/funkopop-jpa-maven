@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="categorie")
 public class Category {
 	//Do we need an int id ?
 	@Id @GeneratedValue

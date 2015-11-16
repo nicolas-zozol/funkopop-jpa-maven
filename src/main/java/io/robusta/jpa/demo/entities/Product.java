@@ -1,24 +1,27 @@
 package io.robusta.jpa.demo.entities;
 
-import java.util.Set;
+import java.util.Date;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
-@Table(name="produit")
 public class Product{
 
 	@Id
 	@GeneratedValue
 	int id;
 	
-	@Basic(optional=false)
+	
+	
+	@Column(nullable=false)
 	String name;
+	
+	
 	
 	float price;
 	
