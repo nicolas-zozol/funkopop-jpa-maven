@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 import io.robusta.fora.EmFactory;
 import io.robusta.jpa.demo.entities.Caddie;
@@ -37,8 +39,7 @@ public class JpaApplication {
 		standard.setParent(csp);
 		lowcost.setParent(csp);
 		
-		
-		
+
 		
 		// We start
 		EntityManager em = EmFactory.createEntityManager();
@@ -78,26 +79,16 @@ public class JpaApplication {
 		
 		EmFactory.transaction( e -> {
 			
-			String query = "SELECT p FROM Product p";
+			String query = "SELECT c FROM Caddie c "
+					+ " JOIN FETCH c.products"
+					+ " WHERE c.id=1";
 			
-			List<Product> result = e.createQuery(query, Product.class).getResultList();
-			System.out.println(result.size());
-			System.out.println(result);
+			List<Caddie> list = 
+					e.createQuery(query, Caddie.class).getResultList();
 			
-			System.out.println("  ========== JOIN QUERY ======= ");
-			
-			String query2 = "SELECT p FROM Product p JOIN p.category c";
-			
-			result = e.createQuery(query2, Product.class).getResultList();
-			
-			for (Product p : result){
-				System.out.println(p.getCategory());
+			for (Caddie c : list){
+				System.out.println(c.getProducts());
 			}
-			
-			System.out.println(result.size());
-			System.out.println(result);
-		
-			
 			
 		});
 		
