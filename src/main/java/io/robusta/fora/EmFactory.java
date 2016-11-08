@@ -24,7 +24,7 @@ public class EmFactory {
 	
 	public static EntityManagerFactory getInstance(){
 		if (instance == null){
-			instance = Persistence.createEntityManagerFactory("fora");
+			instance = Persistence.createEntityManagerFactory("funkopop");
 		}
 		return instance;
 	}
