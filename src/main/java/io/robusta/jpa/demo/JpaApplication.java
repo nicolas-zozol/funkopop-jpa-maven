@@ -10,7 +10,7 @@ import io.robusta.jpa.demo.entities.FunkoPop;
 public class JpaApplication {
 
 	public static void main(String[] args) {
-
+		System.out.println("ddl complete");
 		// We start
 		EntityManager em = EmFactory.createEntityManager();
 		em.getTransaction().begin();
@@ -44,33 +44,10 @@ public class JpaApplication {
 		
 		System.out.println(">>>>>>");
 		
-		/*
-		EmFactory.transaction(e ->{
+		
+		// needed to close transaction
+		EmFactory.getInstance().close();
+
 			
-			String query  =" SELECT c.products FROM Caddie c "
-					+ "JOIN c.products prods "
-					+ "WHERE c.id = 1 AND prods.price > :price";
-			
-			
-			List<Collection> result = e.createQuery(query, Collection.class )
-					.setParameter("price", 2f)
-					.getResultList();
-			System.out.println(">>>>>result");
-			System.out.println(result);
-				
-		});*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-		
-		
 	}
 }
