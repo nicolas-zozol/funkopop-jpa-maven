@@ -1,11 +1,11 @@
-package io.robusta.jpa.demo;
+package io.robusta.jpa.application;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import io.robusta.fora.EmFactory;
-import io.robusta.jpa.demo.entities.FunkoPop;
+import io.robusta.jpa.EmFactory;
+import io.robusta.jpa.entities.FunkoPop;
 
 public class JpaApplication {
 

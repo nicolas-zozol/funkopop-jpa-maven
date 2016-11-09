@@ -1,4 +1,4 @@
-package io.robusta.fora;
+package io.robusta.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

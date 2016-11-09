@@ -1,4 +1,4 @@
-package io.robusta.jpa.demo.entities;
+package io.robusta.jpa.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
