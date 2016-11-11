@@ -1,8 +1,16 @@
 package io.robusta.jpa;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import io.robusta.jpa.entities.FunkoPop;
 
 public class EmFactory {
 
@@ -33,16 +41,32 @@ public class EmFactory {
 		return getInstance().createEntityManager();
 	}
 	
-	public static void transaction(EmWorker worker){
-		
+
+	public static <T> T transaction(Function<EntityManager,T> worker){
+
 		EntityManager em = createEntityManager();
 		em.getTransaction().begin();
-		
-		worker.work(em);
-		
+
+
+		T result = worker.apply(em);
+
 		em.getTransaction().commit();
 		em.close();
-		
+
+		return result;
 	}
+	
+	public static void voidTransaction(Consumer<EntityManager> worker){
+
+		EntityManager em = createEntityManager();
+		em.getTransaction().begin();
+
+
+		worker.accept(em);
+
+		em.getTransaction().commit();
+		em.close();
+	}
+
 	
 }

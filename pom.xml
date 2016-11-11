@@ -17,12 +17,17 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- For connection pooling -->
+		<!-- For connection pooling <dependency> <groupId>org.hibernate</groupId> 
+			<artifactId>hibernate-c3p0</artifactId> <version>${hibernate.version}</version> 
+			</dependency> -->
+		<!-- Rest web services -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-c3p0</artifactId>
-			<version>${hibernate.version}</version>
+			<groupId>com.netflix.feign</groupId>
+			<artifactId>feign-core</artifactId>
+			<version>8.18.0</version>
 		</dependency>
+
+
 		<!-- Database -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -58,6 +63,34 @@
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
 				</configuration>
+			</plugin>
+			<plugin>
+			<!-- Do not run Integration Test -->
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<excludedGroups>io.robusta.jpa.IntegrationTest</excludedGroups>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<!-- run only Integration Test -->
+					<groups>io.robusta.jpa.IntegrationTest</groups>
+				</configuration>
+				<executions>
+				<!-- Strangely there is no default -->
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

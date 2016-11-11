@@ -1,5 +1,6 @@
 package io.robusta.jpa.application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -29,20 +30,9 @@ public class JpaApplication {
 		System.out.println("  ========== NEW QUERY ======= ");
 		
 		
-		EmFactory.transaction( e -> {
-			
-			String query = "SELECT f FROM FunkoPop f ";
-					
-			
-			List<FunkoPop> list = 
-					e.createQuery(query, FunkoPop.class).getResultList();
-			
-			System.out.println(list);
-			
-		});
+		FunkoPop gandalf=EmFactory
+				.transaction(   e -> e.find(FunkoPop.class, 1));
 		
-		
-		System.out.println(">>>>>>");
 		
 		
 		// needed to close transaction
@@ -50,4 +40,5 @@ public class JpaApplication {
 
 			
 	}
+	
 }
