@@ -4,17 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import io.robusta.jpa.HasId;
 
 @Entity
-public class FunkoPop
+public class FunkoPop implements HasId
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id = null;
 	
 
 	private String name;
-	private String universe;
+	@ManyToOne
+	private Universe universe;
 	private boolean waterproof;
 	private double latitude;
 	private double longitude;
@@ -23,14 +27,11 @@ public class FunkoPop
 	{
 	}
 
-	public FunkoPop( int id, String name, String universe, boolean waterproof, double latitude, double longitude )
+	public FunkoPop( String name, Universe universe )
 	{
-		this.id = id;
+		
 		this.name = name;
 		this.universe = universe;
-		this.waterproof = waterproof;
-		this.latitude = latitude;
-		this.longitude = longitude;
 	}
 
 	public String getName()
@@ -43,13 +44,13 @@ public class FunkoPop
 		this.name = name;
 	}
 
-	public String getUniverse()
-	{
+
+	
+	public Universe getUniverse() {
 		return universe;
 	}
 
-	public void setUniverse( String universe )
-	{
+	public void setUniverse(Universe universe) {
 		this.universe = universe;
 	}
 
@@ -63,12 +64,12 @@ public class FunkoPop
 		this.waterproof = waterproof;
 	}
 
-	public int getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId( int id )
+	public void setId( Integer id )
 	{
 		this.id = id;
 	}
@@ -91,5 +92,11 @@ public class FunkoPop
 	public void setLongitude( double longitude )
 	{
 		this.longitude = longitude;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return this.name + " ("+this.universe.name+")";
 	}
 }
