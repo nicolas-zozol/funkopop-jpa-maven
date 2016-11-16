@@ -1,4 +1,4 @@
-package io.robusta.jpa;
+package io.robusta.jpa.entities;
 
 public interface HasId {
 
