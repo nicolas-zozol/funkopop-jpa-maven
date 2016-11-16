@@ -14,18 +14,9 @@ import io.robusta.jpa.entities.FunkoPop;
 
 public class FunkoPopService 
 {
-	@PersistenceContext
-	EntityManager em;
-	
-	@PostConstruct
-	public void sayHelloIamAlive(){
-		System.out.println("I am a FunkoPop service and I am alive");
-	}
 
-	@PreDestroy
-	public void destroying(){
-		System.out.println("Arghhhh");
-	}
+	EntityManager em;
+	ExternalService externalService;
 
 	public List<FunkoPop> findAll()
 	{
@@ -81,8 +72,10 @@ public class FunkoPopService
 	{
 		
 		// Always difficult to choose between Optional and Exception !
-		boolean weatherGood = new ExternalService().isWeatherGood()
+		boolean weatherGood = externalService.isWeatherGood()
 				.orElseThrow(() -> new RuntimeException("No weather found"));
+
+		System.out.println(">>>>>> WEATHER "+ weatherGood);
 
 		List<FunkoPop> result = new ArrayList<>();
 
@@ -95,6 +88,7 @@ public class FunkoPopService
 			}
 		}
 
+		System.out.println(weatherGood + ": "+result);
 		return result;
 	}
 

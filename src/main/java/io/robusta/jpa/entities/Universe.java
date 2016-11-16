@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import io.robusta.jpa.HasId;
 
 @Entity
 public class Universe implements HasId{

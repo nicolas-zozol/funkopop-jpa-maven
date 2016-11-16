@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import io.robusta.jpa.EmFactory;
-import io.robusta.jpa.HasId;
+import io.robusta.jpa.entities.HasId;
 import io.robusta.jpa.IntegrationTest;
 import io.robusta.jpa.entities.FunkoPop;
 import io.robusta.jpa.entities.Universe;

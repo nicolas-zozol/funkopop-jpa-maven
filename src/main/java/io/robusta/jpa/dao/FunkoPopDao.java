@@ -14,6 +14,8 @@ import io.robusta.jpa.entities.FunkoPop;
 
 public class FunkoPopDao {
 
+	EntityManager em;
+
 	public FunkoPopDao() {
 
 	}

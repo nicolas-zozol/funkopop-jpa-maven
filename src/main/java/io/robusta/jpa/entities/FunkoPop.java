@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import io.robusta.jpa.HasId;
+
 
 @Entity
 public class FunkoPop implements HasId
