@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import io.robusta.funko.entities.FunkoPop;
 import io.robusta.funko.entities.Universe;
