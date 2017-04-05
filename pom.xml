@@ -12,29 +12,17 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-		<!-- JPA -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
 		</dependency>
+		
 		<!-- For connection pooling <dependency> <groupId>org.hibernate</groupId> 
 			<artifactId>hibernate-c3p0</artifactId> <version>${hibernate.version}</version> 
 			</dependency> -->
-		<!-- Rest web services -->
-		<dependency>
-			<groupId>com.netflix.feign</groupId>
-			<artifactId>feign-core</artifactId>
-			<version>8.18.0</version>
-		</dependency>
-
-
-		<!-- Database -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.31</version>
-		</dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -43,21 +31,12 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.3.2.Final</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.19</version>
 		</dependency>
-
-
-
 	</dependencies>
 	<build>
 		<plugins>
@@ -78,7 +57,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.18.1</version>
 				<configuration>
-					<excludedGroups>io.robusta.jpa.IntegrationTest</excludedGroups>
+					<excludedGroups>io.robusta.funko.IntegrationTest</excludedGroups>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -89,7 +68,7 @@
 						<include>**/*.java</include>
 					</includes>
 					<!-- run only Integration Test -->
-					<groups>io.robusta.jpa.IntegrationTest</groups>
+					<groups>io.robusta.funko.IntegrationTest</groups>
 				</configuration>
 				<executions>
 				<!-- Strangely there is no default -->
