@@ -1,5 +1,7 @@
 package io.robusta.funko.entities;
 
+import io.robusta.funko.annotations.Fast;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -93,7 +95,6 @@ public class FunkoPop implements HasId {
 		return true;
 	}
 
-	
-	
-	
+
+
 }

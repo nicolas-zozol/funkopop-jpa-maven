@@ -1,5 +1,6 @@
 package io.robusta.funko.service;
 
+import io.robusta.funko.annotations.Slow;
 import io.robusta.funko.entities.FunkoPop;
 import io.robusta.funko.entities.Universe;
 
@@ -23,23 +24,32 @@ public class StartUpService {
 
     @PostConstruct
     void after() {
-        System.out.println("====================AFTER STARTUP=======================");
+        System.out.println("====================AFTER STARTUP App ===================");
         createData();
 
     }
 
 
-    void createData(){
+    @Slow(dangerous = true)
+    void createData() {
 
         Universe marvel = new Universe("Marvel");
-        FunkoPop loki = new FunkoPop("Loki",marvel);
-        FunkoPop hulk = new FunkoPop("Hulk",marvel);
-        FunkoPop thor = new FunkoPop("Thor",marvel);
+        FunkoPop loki = new FunkoPop("Loki", marvel);
+        FunkoPop hulk = new FunkoPop("Hulk", marvel);
+        FunkoPop thor = new FunkoPop("Thor", marvel);
 
 
         Universe starWars = new Universe("Star Wars");
-        FunkoPop jabba = new FunkoPop("Jabba",starWars);
-        FunkoPop boba = new FunkoPop("Boba Fett",starWars);
+        FunkoPop jabba = new FunkoPop("Jabba", starWars);
+        FunkoPop boba = new FunkoPop("Boba Fett", starWars);
+
+        Universe u1 = new Universe("U1");
+        Universe u2 = new Universe("U2");
+        Universe u3 = new Universe("U3");
+
+        em.persist(u1);
+        em.persist(u2);
+        em.persist(u3);
 
         em.persist(marvel);
         em.persist(starWars);
@@ -48,7 +58,6 @@ public class StartUpService {
         em.persist(thor);
         em.persist(jabba);
         em.persist(boba);
-
 
     }
 }
